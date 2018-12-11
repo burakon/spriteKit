@@ -43,7 +43,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // ---タイマー(時間を管理するもの)
     
-    // 背景を動かすためのタイマー
     // backGroundTimer 背景を動かすために必要なタイマーを作る
     var backGroundTimer = Timer()
     // scoreTimer スコア(プレイ時間)を管理するためのタイマーを作る
@@ -97,9 +96,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreBackView.position = CGPoint(x: 0, y: 0)
         scoreBackView.path = CGPath(roundedRect: CGRect(x: CGFloat (-50), y: CGFloat (-30), width: CGFloat(100), height: CGFloat(100)),
                                     cornerWidth: 50, cornerHeight: 50, transform: nil)
-        //strokeColor = 透明
+        // strokeColor = 透明
         scoreBackView.strokeColor = UIColor.clear
-        //塗りつぶす色 = すきなの選んでね
+        // 塗りつぶす色 = すきなの選んでね
         scoreBackView.fillColor = UIColor.gray
         // 奥域を文字の14よりも奥にするので13にする
         scoreBackView.zPosition = 13
@@ -108,8 +107,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // ラベルが表示されていることを確認しよう！(そのあとコメントアウトしてる)
         // self.addChild(scoreLabel)
         
-        //----
+        // ----
         
+        // backGroundTimer 背景を動かすために必要なタイマーを初期化
+        backGroundTimer = Timer()
+        // scoreTimer スコア(プレイ時間)を管理するためのタイマーを初期化
+        scoreTimer = Timer()
+        
+        // ----
+        
+        // 重力を感じる世界にする
+        self.physicsWorld.contactDelegate = self
+        // 重力を設定、リアルな地球は dx 0, dy -9.8
+        self.physicsWorld.gravity = CGVector(dx: 0, dy: -6)
+        
+        // ----
+        
+        // この辺りまだいまいちわからない
+        // 再プレイする時に必要になる初期化
+        blockingObjects.removeAllChildren()
+        // 初期化
+        gameOverImage = SKSpriteNode()
+        // 新しく描画
+        self.addChild(blockingObjects)
         
         
         // ----背景(backView)を作る関数(2枚の背景が動くことを確認したら、関数にしてみよう)
