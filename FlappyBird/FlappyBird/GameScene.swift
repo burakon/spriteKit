@@ -145,6 +145,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // 描画するけど、ゲームオーバーになるまで隠しておく(これをかかないと最初から最後までずっとgameoverが表示される、ぜひ表示してみてね)
         gameOverImage.isHidden = true
         
+        // ----鳥を作ろう
+        
+        // テクスチャーを作る
+        let birdTexture = SKTexture(imageNamed: "bird.png")
+        // テクスチャーを貼る
+        bird = SKSpriteNode(texture: birdTexture)
+        // 鳥の位置を決める
+        bird.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
+        
+        // 鳥に当たり判定をつける
+        // 高さの半分の直系の当たり判定の円を作る
+        bird.physicsBody = SKPhysicsBody(circleOfRadius: bird.size.height/2)
+        // 物理的なリアクションが取れる（はねかえる、とか）
+        bird.physicsBody?.isDynamic = true
+        // ころころ回らないようにする
+        bird.physicsBody?.allowsRotation = false
+        
         // ----背景(backView)を作る関数(2枚の背景が動くことを確認したら、関数にしてみよう)
         createBackView()
     }
