@@ -43,8 +43,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // ---タイマー(時間を管理するもの)
     
-    // backGroundTimer 背景を動かすために必要なタイマーを作る
-    var backGroundTimer = Timer()
+    // createStageTimer ステージをつくるために必要なタイマーを作る
+    var createStageTimer = Timer()
     // scoreTimer スコア(プレイ時間)を管理するためのタイマーを作る
     var scoreTimer = Timer()
     
@@ -109,8 +109,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // ----
         
-        // backGroundTimer 背景を動かすために必要なタイマーを初期化
-        backGroundTimer = Timer()
+        // createStageTimer ステージを作るために必要なタイマーを初期化
+        createStageTimer = Timer()
         // scoreTimer スコア(プレイ時間)を管理するためのタイマーを初期化
         scoreTimer = Timer()
         
@@ -176,6 +176,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // 鳥を表示する
         self.addChild(bird)
+        
+        
+        // ----地面に落ちたらゲームオーバーになるようにする
+        
+        // groundは地面だけで画像は表示しないのでSKNodeにする
+        let ground = SKNode()
+        ground.position = CGPoint(x: -325, y: -700)
+        // 大きさを設定、幅は画面の横幅、高さは１
+        ground.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.frame.width, height: 1))
+        // 物理影響を受けないので下に落ちないようになる
+        ground.physicsBody?.isDynamic = false
+        
+        // 鳥がカテゴリー2のものとぶつかるとゲームオーバーにしたいので、2にする
+        ground.physicsBody?.categoryBitMask = 2
+        // blockingObjectsに描画
+        blockingObjects.addChild(ground)
+        
+        
         
         // ----背景(backView)を作る関数(2枚の背景が動くことを確認したら、関数にしてみよう)
         createBackView()
