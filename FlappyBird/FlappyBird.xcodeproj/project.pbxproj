@@ -15,6 +15,8 @@
 		C31F5D0421BED78600763958 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C31F5D0221BED78600763958 /* Main.storyboard */; };
 		C31F5D0621BED78900763958 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C31F5D0521BED78900763958 /* Assets.xcassets */; };
 		C31F5D0921BED78900763958 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C31F5D0721BED78900763958 /* LaunchScreen.storyboard */; };
+		C31F5D1121BFDC2B00763958 /* backSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C31F5D1021BFDC2A00763958 /* backSound.mp3 */; };
+		C31F5D1321BFDC3A00763958 /* jumpSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C31F5D1221BFDC3A00763958 /* jumpSound.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		C31F5D0521BED78900763958 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C31F5D0821BED78900763958 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C31F5D0A21BED78900763958 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C31F5D1021BFDC2A00763958 /* backSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backSound.mp3; sourceTree = "<group>"; };
+		C31F5D1221BFDC3A00763958 /* jumpSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = jumpSound.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,8 @@
 				C31F5CFE21BED78600763958 /* GameScene.swift */,
 				C31F5D0021BED78600763958 /* GameViewController.swift */,
 				C31F5D0221BED78600763958 /* Main.storyboard */,
+				C31F5D1021BFDC2A00763958 /* backSound.mp3 */,
+				C31F5D1221BFDC3A00763958 /* jumpSound.mp3 */,
 				C31F5D0521BED78900763958 /* Assets.xcassets */,
 				C31F5D0721BED78900763958 /* LaunchScreen.storyboard */,
 				C31F5D0A21BED78900763958 /* Info.plist */,
@@ -133,9 +139,11 @@
 			files = (
 				C31F5D0421BED78600763958 /* Main.storyboard in Resources */,
 				C31F5CFB21BED78600763958 /* GameScene.sks in Resources */,
+				C31F5D1321BFDC3A00763958 /* jumpSound.mp3 in Resources */,
 				C31F5D0621BED78900763958 /* Assets.xcassets in Resources */,
 				C31F5D0921BED78900763958 /* LaunchScreen.storyboard in Resources */,
 				C31F5CFD21BED78600763958 /* Actions.sks in Resources */,
+				C31F5D1121BFDC2B00763958 /* backSound.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,9 +20,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // ゲームオーバー時の画像を作る
     var gameOverImage = SKSpriteNode()
     // タップ時に鳥が跳ねる音を作る
-    let jumpSound = SKAction.playSoundFileNamed("sound.mp3", waitForCompletion: false)
+    let jumpSound = SKAction.playSoundFileNamed("jumpSound.mp3", waitForCompletion: false)
     // バックグラウンドの音楽(BGM)を作る https://maoudamashii.jokersounds.com/ 自分の好きな曲使ってください
-    let backSound = SKAction.playSoundFileNamed("buckSound.mp3", waitForCompletion: false)
+    let backSound = SKAction.playSoundFileNamed("backSound.mp3", waitForCompletion: false)
     
     
     // ----ゲームに必要な登場人物をひとつずつ作っていくよ
@@ -58,6 +58,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         
         // 音楽を流す
+            // 下記2行を書いたところでアプリを起動すると、両方の音楽がアプリ起動と同時に流れるのでビルドしてもらいたい
         self.run(backSound, withKey: "backSound")
         self.run(jumpSound, withKey: "jumpSound")
         
