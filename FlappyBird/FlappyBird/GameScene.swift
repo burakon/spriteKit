@@ -68,10 +68,52 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // 登場人物を表示するための関数
     func createParts() {
-        // 背景(backView)を作る関数(2枚の背景が動くことを確認したら、関数にしてみよう)
+        
+        // 初期化
+        bird = SKSpriteNode()
+        gameOverImage = SKSpriteNode()
+        blockingObjects = SKNode()
+        
+        score = Int(0)
+        
+        // ----スコアラベルを作る
+        //初期化
+        scoreLabel = SKLabelNode()
+        // SKSceneにあるscoreLabelを取得する(必要性がわからないので一旦コメントアウト)
+        // scoreLabel = self.childNode(withName: "scoreLabel") as! SKLabelNode
+        // scoreの数字を取得して表示する
+        scoreLabel.text = "\(score)"
+        // 文字の色は白(好きな色選んでね)
+        scoreLabel.color = UIColor.white
+        // 文字の大きさ
+        scoreLabel.fontSize = 50
+        // 好きな文字の種類を選ぼう(どう選ぼう？)
+        scoreLabel.fontName = "HelveticaNeue-Bold"
+        // zポジション おくいきを表す。大きいほど手前に、小さいほど奥にいく
+        scoreLabel.zPosition = 14
+        
+        // ----スコアラベルの背景を作る
+        let scoreBackView = SKShapeNode()
+        scoreBackView.position = CGPoint(x: 0, y: 0)
+        scoreBackView.path = CGPath(roundedRect: CGRect(x: CGFloat (-50), y: CGFloat (-30), width: CGFloat(100), height: CGFloat(100)),
+                                    cornerWidth: 50, cornerHeight: 50, transform: nil)
+        //strokeColor = 透明
+        scoreBackView.strokeColor = UIColor.clear
+        //塗りつぶす色 = すきなの選んでね
+        scoreBackView.fillColor = UIColor.gray
+        // 奥域を文字の14よりも奥にするので13にする
+        scoreBackView.zPosition = 13
+        // scoreBackViewをscoreLabelに描画する
+        scoreLabel.addChild(scoreBackView)
+        // ラベルが表示されていることを確認しよう！(そのあとコメントアウトしてる)
+        // self.addChild(scoreLabel)
+        
+        //----
+        
+        
+        
+        // ----背景(backView)を作る関数(2枚の背景が動くことを確認したら、関数にしてみよう)
         createBackView()
-        
-        
     }
     
     // 背景(backView)を作る関数
