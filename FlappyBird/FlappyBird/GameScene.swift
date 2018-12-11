@@ -67,9 +67,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     // 登場人物を表示するための関数
-    func createParts(){
+    func createParts() {
+        // 背景(backView)を作る関数(2枚の背景が動くことを確認したら、関数にしてみよう)
+        createBackView()
         
-        // 背景(backGroundView)を作ろう
+        
+    }
+    
+    // 背景(backView)を作る関数
+    func createBackView() {
+        // 背景(backView)を作ろう
         // backViewに画像bg.pngを入れる
         let backView = SKSpriteNode(imageNamed: "bg.png")
         // 最初に置く場所を決める
@@ -83,6 +90,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             ])))
         // backViewを表示する
         self.addChild(backView)
+        
+        // 1枚だけでは黒い画面が見えてしまうので、2枚目を作ろう
+        // backView2に画像bg.pngを入れる
+        let backView2 = SKSpriteNode(imageNamed: "bg.png")
+        // 最初に置く場所を決める (初期位置をbackViewと変える)
+        backView2.position = CGPoint(x: self.frame.width, y: 0)
+        //動かし続ける repeatForever
+        backView2.run(SKAction.repeatForever(SKAction.sequence([
+            // 13秒かけて右から左にbackViewが動く(位置をbackViewと変える)
+            SKAction.moveTo(x: 0, duration: 13.0),
+            // 13秒かけて動き終わったら最初の位置にすぐ戻る(位置をbackViewと変える)
+            SKAction.moveTo(x: self.frame.width, duration: 0.0)
+            ])))
+        // backView2を表示する
+        self.addChild(backView2)
     }
 
     override func update(_ currentTime: TimeInterval) {
