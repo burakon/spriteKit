@@ -162,6 +162,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // ころころ回らないようにする
         bird.physicsBody?.allowsRotation = false
         
+        
+        // ----鳥にカテゴリーをつける、表示する
+
+        // 鳥はカテゴリー1 にする
+        bird.physicsBody?.categoryBitMask = 1
+        // カテゴリー2 のものにぶつかった時に衝突判定するように設定する
+        bird.physicsBody?.collisionBitMask = 2
+        bird.physicsBody?.contactTestBitMask = 2
+        
+        // 鳥と障害物は同じzPositionにしよう
+        bird.zPosition = 10
+        
+        // 鳥を表示する
+        self.addChild(bird)
+        
         // ----背景(backView)を作る関数(2枚の背景が動くことを確認したら、関数にしてみよう)
         createBackView()
     }
