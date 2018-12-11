@@ -193,10 +193,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // blockingObjectsに描画
         blockingObjects.addChild(ground)
         
+        // ----障害物(パイプ)を作成するタイマーを動かす
         
+        createStageTimer = Timer.scheduledTimer(timeInterval: 4,
+                                                target: self,
+                                                selector: #selector(createPipe),
+                                                userInfo: nil,
+                                                repeats: true)
+        
+        // ---- scoreをプラスしていくタイマーを動かす
+        
+        createStageTimer = Timer.scheduledTimer(timeInterval: 1,
+                                                target: self,
+                                                selector: #selector(updateScore),
+                                                userInfo: nil,
+                                                repeats: true)
         
         // ----背景(backView)を作る関数(2枚の背景が動くことを確認したら、関数にしてみよう)
         createBackView()
+    }
+    
+    // 障害物を作成する
+    @objc func createPipe() {
+        
+    }
+    
+    // １秒ごとにスコアをどんどんプラスしていく
+    @objc func updateScore() {
+        score = score + 1
+        scoreLabel.text = "\(score)"
     }
     
     // 背景(backView)を作る関数
