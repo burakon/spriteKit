@@ -69,6 +69,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // 登場人物を表示するための関数
     func createParts(){
         
+        // 背景(backGroundView)を作ろう
+        // backViewに画像bg.pngを入れる
+        let backView = SKSpriteNode(imageNamed: "bg.png")
+        // 最初に置く場所を決める
+        backView.position = CGPoint(x: 0, y: 0)
+        //動かし続ける repeatForever
+        backView.run(SKAction.repeatForever(SKAction.sequence([
+            // 13秒かけて右から左にbackViewが動く
+            SKAction.moveTo(x: -self.size.width, duration: 13.0),
+            // 13秒かけて動き終わったら最初の位置にすぐ戻る
+            SKAction.moveTo(x: 0, duration: 0.0)
+            ])))
+        // backViewを表示する
+        self.addChild(backView)
     }
 
     override func update(_ currentTime: TimeInterval) {
