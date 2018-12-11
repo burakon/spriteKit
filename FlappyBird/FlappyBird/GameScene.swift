@@ -132,6 +132,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(blockingObjects)
         
         
+        // ----gameover画面作成
+        
+        // テクスチャー作る、画像を直接spritnodeにつけられないのでテクスチャーを作る必要がある
+        let gameOverTexture = SKTexture(imageNamed: "GameOverImage.jpg")
+        gameOverImage = SKSpriteNode(texture: gameOverTexture)
+        gameOverImage.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
+        // 鳥とか障害より奥にする
+        gameOverImage.zPosition = 11
+        // 描画しておく
+        self.addChild(gameOverImage)
+        // 描画するけど、ゲームオーバーになるまで隠しておく(これをかかないと最初から最後までずっとgameoverが表示される、ぜひ表示してみてね)
+        gameOverImage.isHidden = true
+        
         // ----背景(backView)を作る関数(2枚の背景が動くことを確認したら、関数にしてみよう)
         createBackView()
     }
