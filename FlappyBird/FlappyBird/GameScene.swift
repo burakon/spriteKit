@@ -52,7 +52,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // LINEに投稿するための文字を作る
     var LineString = String()
     
+    
+    
+    // アプリ起動時(ゲーム開始時)に呼ばれる
     override func didMove(to view: SKView) {
+        
+        // 音楽を流す
+        self.run(backSound, withKey: "backSound")
+        self.run(jumpSound, withKey: "jumpSound")
+        
+        // ↑で作った登場人物を表示するための関数を書く
+        createParts()
+    }
+    
+    // 登場人物を表示するための関数
+    func createParts(){
+        
     }
 
     override func update(_ currentTime: TimeInterval) {
