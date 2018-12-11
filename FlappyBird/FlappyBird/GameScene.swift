@@ -75,6 +75,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         score = Int(0)
         
+        // ----背景(backView)を作る関数(2枚の背景が動くことを確認したら、関数にしてみよう)
+        createBackView()
+        
         // ----スコアラベルを作る
         //初期化
         scoreLabel = SKLabelNode()
@@ -193,7 +196,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // blockingObjectsに描画
         blockingObjects.addChild(ground)
         
-        // ----障害物(パイプ)を作成するタイマーを動かす
+        // ----4秒ごとに障害物(パイプ)を作成するタイマーを動かす
         
         createStageTimer = Timer.scheduledTimer(timeInterval: 4,
                                                 target: self,
@@ -201,7 +204,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                                 userInfo: nil,
                                                 repeats: true)
         
-        // ---- scoreをプラスしていくタイマーを動かす
+        // ---- 1秒ごとにscoreをプラスしていくタイマーを動かす
         
         createStageTimer = Timer.scheduledTimer(timeInterval: 1,
                                                 target: self,
@@ -209,8 +212,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                                 userInfo: nil,
                                                 repeats: true)
         
-        // ----背景(backView)を作る関数(2枚の背景が動くことを確認したら、関数にしてみよう)
-        createBackView()
+
     }
     
     // 障害物を作成する
