@@ -252,7 +252,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         blockingObjects.addChild(pipeTop)
         
         // ----下のパイプを作る
-        
+
         // テクスチャーを作成
         let pipeBottomTexture = SKTexture(imageNamed: "pipeBottomImage.png")
         // テクスチャーを貼り付け
@@ -269,6 +269,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // blockingObjectsにaddChild
         blockingObjects.addChild(pipeBottom)
 
+        // ----パイプに動きをつける
+        let pipeMove = SKAction.moveBy(x: -self.frame.width, y: 0, duration: 4 )
+        pipeTop.run(pipeMove)
+        pipeBottom.run(pipeMove)
+        
+        
     }
     
     
