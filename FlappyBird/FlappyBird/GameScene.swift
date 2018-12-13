@@ -29,6 +29,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // 鳥がぶつかりそうになる緑色の竹(上に表示するからTop)
     var pipeTop = SKSpriteNode()
+    // 鳥がぶつかりそうになる緑色の竹(下に表示するからBottom)
+    var pipeBottom = SKSpriteNode()
     
     // SKNodeは画像が使えない、見えない物体のみの存在。いるんだけど見えないものです。(何のために使うかはまだ説明がないので後述します)
         // SKNode -> 画像をつけることができない
@@ -223,17 +225,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // 障害物を作成する、上下のもの、高さをランダムに変えていく
     @objc func createPipe() {
-        // パイプを作る
-        let randomLength = arc4random() % UInt32(self.frame.size.height / 2)
-        let offset = CGFloat(randomLength) - self.frame.size.height / 4
         
+        // ----パイプを作るのに必要な情報を定義
+        let randomLength = arc4random() % UInt32(self.frame.size.height / 2)
+        // 引きたい数(命名変えたい)
+        let offset = CGFloat(randomLength) - self.frame.size.height / 4
         // 真ん中の鳥が通る空間
         let gap = bird.size.height * 3
+        
+        // ----上のパイプを作る
         // テクスチャーを作成
         let pipeTopTexture = SKTexture(imageNamed: "pipeTopImage.png")
         // テクスチャーを貼り付け
         pipeTop = SKSpriteNode(texture: pipeTopTexture)
-        
         // 後で良い計算式考えて
         pipeTop.position = CGPoint(x: self.frame.midX + self.frame.width / 2,
                                    y: self.frame.midY + pipeTop.size.height / 2 + gap / 2 + offset)
@@ -242,6 +246,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // 重さを与えるかどうか( false -> 重さがないので落ちない)
         pipeTop.physicsBody?.isDynamic = false
         
+        // 鳥とぶつかってゲームオーバーにしたいので、鳥とぶつかるようにカテゴリーを2にする
+        pipeTop.physicsBody?.categoryBitMask = 2
+        // blockingObjectsにaddChild
+        blockingObjects.addChild(pipeTop)
+        
+        // ----下のパイプを作る
+        
+        // テクスチャーを作成
+        let pipeBottomTexture = SKTexture(imageNamed: "pipeBottomImage.png")
+        // テクスチャーを貼り付け
+        pipeBottom = SKSpriteNode(texture: pipeBottomTexture)
+        // 後で良い計算式考えて
+        pipeBottom.position = CGPoint(x: self.frame.midX + self.frame.width / 2,
+                                   y: self.frame.midY + pipeBottom.size.height / 2 + gap / 2 + offset)
+        // ぶつかり判定をする大きさを指定
+        pipeBottom.physicsBody = SKPhysicsBody(rectangleOf: pipeBottom.size)
+        // 重さを与えるかどうか( false -> 重さがないので落ちない)
+        pipeBottom.physicsBody?.isDynamic = false
+        // 鳥とぶつかってゲームオーバーにしたいので、鳥とぶつかるようにカテゴリーを2にする
+        pipeBottom.physicsBody?.categoryBitMask = 2
+        // blockingObjectsにaddChild
+        blockingObjects.addChild(pipeBottom)
+
     }
     
     
