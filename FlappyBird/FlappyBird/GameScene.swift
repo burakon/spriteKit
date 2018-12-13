@@ -335,6 +335,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // ----セーブデータを比較して、今までのスコアより大きければ更新する
         let ud = UserDefaults.standard
+        // userDefaultに入っているsaveDataを取得する
         self.scoreString = ud.object(forKey: "saveData") as! String
         
         // セーブデータのscoreStringと、今プレイしたゲームのscoreLabelの文字をくらべて、今プレイしたゲームのscoreLabelが大きかったら
