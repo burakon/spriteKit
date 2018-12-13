@@ -230,9 +230,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // 真ん中の鳥が通る空間
         let gap = bird.size.height * 3
         // テクスチャーを作成
-        let pipeTopTexture = SKTexture(imageNamed: "pipeTop.png")
+        let pipeTopTexture = SKTexture(imageNamed: "pipeTopImage.png")
         // テクスチャーを貼り付け
         pipeTop = SKSpriteNode(texture: pipeTopTexture)
+        
+        // 後で良い計算式考えて
+        pipeTop.position = CGPoint(x: self.frame.midX + self.frame.width / 2,
+                                   y: self.frame.midY + pipeTop.size.height / 2 + gap / 2 + offset)
+        // ぶつかり判定をする大きさを指定
+        pipeTop.physicsBody = SKPhysicsBody(rectangleOf: pipeTop.size)
+        // 重さを与えるかどうか( false -> 重さがないので落ちない)
+        pipeTop.physicsBody?.isDynamic = false
         
     }
     
