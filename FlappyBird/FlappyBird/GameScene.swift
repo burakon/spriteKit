@@ -348,6 +348,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.removeAction(forKey: "jumpSound")
     }
 
+    // ----タッチした時の処理を書こう
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        // ----ゲームオーバー中だったら
+        if gameOverImage.isHidden == false {
+            
+            // ----再度ゲームをはじめる
+            // ゲームオーバーイメージを隠す
+            gameOverImage.isHidden = true
+            // 鳥を初期化
+            bird.removeFromParent()
+            // 再度ゲームを起動するのでゲームに必要なパーツを作る
+            createParts()
+        } else {
+          // ---- else ゲームプレイ中の場合
+            
+            // 鳥の動きを一度止める(よくわかってない)
+            bird.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+            // y軸に力を与えて、500の力でジャンプさせる
+            bird.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 500))
+            run(jumpSound)
+        }
+    }
+    
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
     }
