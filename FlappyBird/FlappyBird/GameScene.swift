@@ -50,8 +50,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // scoreTimer スコア(プレイ時間)を管理するためのタイマーを作る
     var scoreTimer = Timer()
     
-    // LINEに投稿するための文字を作る
-    var LineString = String()
+    // スコアを入れる文字を作る
+    var scoreString = String()
     
     
     
@@ -259,7 +259,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pipeBottom = SKSpriteNode(texture: pipeBottomTexture)
         // 後で良い計算式考えて
         pipeBottom.position = CGPoint(x: self.frame.midX + self.frame.width / 2,
-                                   y: self.frame.midY + pipeBottom.size.height / 2 + gap / 2 + offset)
+                                   y: self.frame.midY - pipeBottom.size.height / 2 - gap / 2 + offset)
         // ぶつかり判定をする大きさを指定
         pipeBottom.physicsBody = SKPhysicsBody(rectangleOf: pipeBottom.size)
         // 重さを与えるかどうか( false -> 重さがないので落ちない)
@@ -309,6 +309,43 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             ])))
         // backView2を表示する
         self.addChild(backView2)
+    }
+    
+    // ----delegateメソッドを書いていく
+    // 衝突した場合に呼ばれる関数
+    func didBegin(_ contact: SKPhysicsContact) {
+        // ぶつかったら止まるようにする(息の根を止める
+        blockingObjects.speed = 0
+        
+        // ゲームオーバーイメージを表示させる
+        gameOverImage.isHidden = false
+        
+        // 時間を止める
+        scoreTimer.invalidate()
+        createStageTimer.invalidate()
+        
+        // scoreをゼロにする(なんで？説明できない
+        score = 0
+        // label初期化
+        scoreLabel.removeAllChildren()
+        
+        // blockingObjectsに乗っている全てに子供を削除、全てのやりかけの行動も削除
+        blockingObjects.removeAllActions()
+        blockingObjects.removeAllChildren()
+        
+        // ----セーブデータを比較して、今までのスコアより大きければ更新する
+        let ud = UserDefaults.standard
+        self.scoreString = ud.object(forKey: "saveData") as! String
+        
+        // セーブデータのscoreStringと、今プレイしたゲームのscoreLabelの文字をくらべて、今プレイしたゲームのscoreLabelが大きかったら
+        if Int(self.scoreString)! < Int(scoreLabel.text!)! {
+            // saveDataとしてuserDefaultsに保存する
+            ud.set(scoreLabel.text, forKey: "saveData")
+        }
+        
+        // ----音楽を止める
+        self.removeAction(forKey: "backSound")
+        self.removeAction(forKey: "jumpSound")
     }
 
     override func update(_ currentTime: TimeInterval) {
