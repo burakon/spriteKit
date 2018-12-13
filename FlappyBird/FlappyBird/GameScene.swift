@@ -215,16 +215,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     }
     
-    // 障害物を作成する
-    @objc func createPipe() {
-        
-    }
-    
     // １秒ごとにスコアをどんどんプラスしていく
     @objc func updateScore() {
         score = score + 1
         scoreLabel.text = "\(score)"
     }
+    
+    // 障害物を作成する、上下のもの、高さをランダムに変えていく
+    @objc func createPipe() {
+        // パイプを作る
+        let randomLength = arc4random() % UInt32(self.frame.size.height / 2)
+        let offset = CGFloat(randomLength) - self.frame.size.height / 4
+        
+        // 真ん中の鳥が通る空間
+        let gap = bird.size.height * 3
+        // テクスチャーを作成
+        let pipeTopTexture = SKTexture(imageNamed: "pipeTop.png")
+        // テクスチャーを貼り付け
+        pipeTop = SKSpriteNode(texture: pipeTopTexture)
+        
+    }
+    
     
     // 背景(backView)を作る関数
     func createBackView() {
